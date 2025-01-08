@@ -1,0 +1,230 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --danger-color: #c0392b;
+    --light-bg: #f5f6fa;
+    --border-radius: 8px;
+    --grade-d-color: #8e44ad; /* لون جديد للتقدير D */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Kufi Arabic', 'IBM Plex Sans', sans-serif;
+    line-height: 1.6;
+    color: #2c3e50;
+    background-color: #f5f6fa;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.student-info {
+    background: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.info-label {
+    color: var(--secondary-color);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.info-value {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+.info-value.rank {
+    color: var(--success-color); /* لون الترتيب */
+}
+
+.print-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.print-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.semester {
+    background: white;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.semester-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 20px;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer; /* تغيير المؤشر إلى يد عند التمرير */
+}
+
+.semester-gpa {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.courses-list {
+    display: none; /* إخفاء قائمة المواد بشكل افتراضي */
+    padding: 15px;
+}
+
+.semester.active .courses-list {
+    display: block; /* عرض قائمة المواد عند تفعيل الفصل الدراسي */
+}
+
+.course-item {
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 15px;
+    align-items: center;
+}
+
+.course-code {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.course-name {
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
+.course-details {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.grade {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    min-width: 45px;
+    text-align: center;
+}
+
+.grade-a {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.grade-b {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.grade-c {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.grade-d {
+    background-color: #f5e8ff; /* لون خلفية فاتح للتقدير D */
+    color: var(--grade-d-color); /* لون النص للتقدير D */
+}
+
+.grade-f {
+    background-color: #f8d7da; /* لون خلفية التقدير F */
+    color: #721c24; /* لون النص للتقدير F */
+}
+
+.score {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--secondary-color);
+    font-weight: 500;
+    direction: ltr;
+    display: inline-block;
+}
+
+.point {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+@media screen and (max-width: 768px) {
+    .course-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .course-details {
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+}
+
+@media print {
+    body * {
+        visibility: hidden; /* إخفاء كل العناصر */
+    }
+
+    #studentResults, #studentResults * {
+        visibility: visible; /* إظهار نتائج الطلاب فقط */
+    }
+
+    #studentResults {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    .print-button {
+        display: none; /* إخفاء زر الطباعة أثناء الطباعة */
+    }
+}
