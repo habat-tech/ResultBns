@@ -4,34 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>عرض النتائج والترتيب بناءً على GPA</title>
+    <!-- رابط خط Cairo من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* تنسيق عام */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Cairo', Arial, sans-serif;
             direction: rtl;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
         }
+
         .container {
-            max-width: 800px;
-            margin: 50px auto;
+            max-width: 90%;
+            margin: 20px auto;
             padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
+
+        h1 {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
+
         th, td {
-            padding: 10px;
-            border: 1px solid #ccc;
+            padding: 15px;
+            border: 1px solid #ddd;
             text-align: center;
+            font-size: 1rem;
         }
+
         th {
-            background-color: #f4f4f4;
-        }
-        .duplicate {
-            color: green;
+            background-color: #3498db; /* لون أزرق */
+            color: white;
             font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* تنسيق أول 10 مراكز */
+        tr.top-ten {
+            background-color: #ecf0f1; /* لون رمادي فاتح */
+        }
+
+        tr.top-ten:hover {
+            background-color: #d5dbdb; /* لون رمادي أغمق عند التحويم */
+        }
+
+        /* تنسيق باقي الصفوف */
+        tr:not(.top-ten):hover {
+            background-color: #f8f9fa; /* لون رمادي فاتح جدًا عند التحويم */
+        }
+
+        .duplicate {
+            color: #27ae60; /* لون أخضر */
+            font-weight: bold;
+        }
+
+        /* تنسيق الأرقام في أول 10 مراكز */
+        tr.top-ten td:first-child {
+            font-weight: bold;
+            color: #e74c3c; /* لون أحمر */
+        }
+
+        /* تحسين المسافات والتنسيقات */
+        .container {
+            padding: 25px;
+        }
+
+        table {
+            margin-top: 25px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+        }
+
+        /* تجاوبية الصفحة */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.3rem;
+            }
+
+            th, td {
+                padding: 8px;
+                font-size: 0.85rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -76,7 +164,7 @@
             let currentRank = 1;
             let sameGPACount = 0;
             
-            filteredData.forEach((student) => {
+            filteredData.forEach((student, index) => {
                 const row = document.createElement('tr');
                 
                 // تحقق مما إذا كان هناك تغيير في الـ GPA
@@ -89,6 +177,11 @@
                     sameGPACount = 0;
                 } else {
                     sameGPACount++;
+                }
+
+                // إضافة كلاس "top-ten" لأول 10 مراكز
+                if (currentRank <= 10) {
+                    row.classList.add('top-ten');
                 }
 
                 row.innerHTML = `
