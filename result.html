@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بحث عن النتيجة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>بحث عن النتيجة</h1>
+        <input type="text" id="searchInput" placeholder="ادخل رقم الجلوس أو الاسم">
+        <button onclick="searchResult()">بحث</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        let data = [];
+
+        // تحميل البيانات من ملف JSON
+        async function loadData() {
+            try {
+                const response = await fetch('نتائج_GPA.json'); // تأكد من أن المسار صحيح
+                data = await response.json();
+            } catch (error) {
+                console.error('حدث خطأ أثناء تحميل البيانات:', error);
+            }
+        }
+
+        function searchResult() {
+            const input = document.getElementById('searchInput').value.trim();
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+
+            const student = data.find(s => s['رقم الجلوس'] === input || s['اسم الطالب'].includes(input));
+
+            if (student) {
+                // فرز الطلاب بناءً على GPA
+                const sortedData = data.slice().sort((a, b) => b.GPA - a.GPA);
+                const rank = sortedData.findIndex(s => s['رقم الجلوس'] === student['رقم الجلوس']) + 1;
+
+                resultDiv.innerHTML = `
+                    <p><strong>اسم الطالب:</strong> ${student['اسم الطالب']}</p>
+                    <p><strong>رقم الجلوس:</strong> ${student['رقم الجلوس']}</p>
+                    <p><strong>GPA:</strong> ${student['GPA']}</p>
+                    <p><strong>الترتيب في الدفعة:</strong> ${rank}</p>
+                `;
+            } else {
+                resultDiv.innerHTML = '<p>لم يتم العثور على نتيجة.</p>';
+            }
+        }
+
+        // تحميل البيانات عند تحميل الصفحة
+        window.onload = loadData;
+    </script>
+</body>
+</html>
