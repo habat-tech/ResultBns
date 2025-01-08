@@ -1,0 +1,328 @@
+[
+    {
+        "اسم الطالب": "ابتسام عبد التواب سعيد صالح سعيد",
+        "رقم الجلوس": "230800001",
+        "CGPA": "3.24",
+        "First Semester GPA": "3.070",
+        "First Semester Courses": [
+            {
+                "Course Code": "AHN1111",
+                "Course Name": "أساسيات تمريض 1 ( نظري )",
+                "Course Status": "Active",
+                "Point": "2.990",
+                "Degree": "148.00",
+                "Grade": "C+(1)"
+            },
+            {
+                "Course Code": "AHN1118",
+                "Course Name": "اخلاقيات المهنة والتشريعات",
+                "Course Status": "Active",
+                "Point": "2.790",
+                "Degree": "69.00",
+                "Grade": "F"
+            },
+            {
+                "Course Code": "AHN1216",
+                "Course Name": "فسيولوجى",
+                "Course Status": "Active",
+                "Point": "2.940",
+                "Degree": "73.00",
+                "Grade": "C+(2)"
+            },
+            {
+                "Course Code": "AHN1217",
+                "Course Name": "تشريح ( نظرى )",
+                "Course Status": "Active",
+                "Point": "3.040",
+                "Degree": "76.00",
+                "Grade": "B (4)"
+            },
+            {
+                "Course Code": "AHN1219",
+                "Course Name": "كمياء حيوية",
+                "Course Status": "Active",
+                "Point": "2.790",
+                "Degree": "69.00",
+                "Grade": "C (1)"
+            },
+            {
+                "Course Code": "AHN13118",
+                "Course Name": "حقوق الانسان",
+                "Course Status": "Active",
+                "Point": "2.640",
+                "Degree": "33.00",
+                "Grade": "C (4)"
+            },
+            {
+                "Course Code": "AHN1312",
+                "Course Name": "لغة انجليزية 1",
+                "Course Status": "Active",
+                "Point": "3.540",
+                "Degree": "88.00",
+                "Grade": "A-(2)"
+            },
+            {
+                "Course Code": "AHN14111",
+                "Course Name": "تشريح (معملى)",
+                "Course Status": "Active",
+                "Point": "2.590",
+                "Degree": "64.00",
+                "Grade": "D (1)"
+            },
+            {
+                "Course Code": "AHN1413",
+                "Course Name": "أساسيات تمريض 1 (عملى)",
+                "Course Status": "Active",
+                "Point": "3.540",
+                "Degree": "176.50",
+                "Grade": "A-(2)"
+            },
+            {
+                "Course Code": "ANA12110",
+                "Course Name": "ميكروبيولوجى ومكافحة العدوى",
+                "Course Status": "Active",
+                "Point": "3.000",
+                "Degree": "75.00",
+                "Grade": "B (5)"
+            }
+        ],
+        "Second Semester GPA": "3.420",
+        "Second Semester Courses": [
+            {
+                "Course Code": "AHN11114",
+                "Course Name": "التقييم الصحى (نظرى)",
+                "Course Status": "Active",
+                "Point": "3.390",
+                "Degree": "84.00",
+                "Grade": "B+(1)"
+            },
+            {
+                "Course Code": "AHN1112",
+                "Course Name": "اساسيات التمريض 2 (نظرى)",
+                "Course Status": "Active",
+                "Point": "3.340",
+                "Degree": "166.00",
+                "Grade": "B+(2)"
+            },
+            {
+                "Course Code": "AHN1114",
+                "Course Name": "الرعاية التمريضية الشاملة",
+                "Course Status": "Active",
+                "Point": "3.200",
+                "Degree": "80.00",
+                "Grade": "B+(5)"
+            },
+            {
+                "Course Code": "AHN12115",
+                "Course Name": "علم الادوية",
+                "Course Status": "Active",
+                "Point": "3.690",
+                "Degree": "92.00",
+                "Grade": "A (3)"
+            },
+            {
+                "Course Code": "AHN14116",
+                "Course Name": "التقييم الصحى (معملى)",
+                "Course Status": "Active",
+                "Point": "2.990",
+                "Degree": "74.00",
+                "Grade": "C+(1)"
+            },
+            {
+                "Course Code": "AHN1414",
+                "Course Name": "أساسيات التمريض 2 (عملى)",
+                "Course Status": "Active",
+                "Point": "3.740",
+                "Degree": "187.00",
+                "Grade": "A (2)"
+            },
+            {
+                "Course Code": "CHN13617",
+                "Course Name": "التثقيف الصحى",
+                "Course Status": "Active",
+                "Point": "3.400",
+                "Degree": "85.00",
+                "Grade": "A-(5)"
+            },
+            {
+                "Course Code": "ELC1",
+                "Course Name": "مهارات التفكير وحل المشكلات",
+                "Course Status": "Active",
+                "Point": "3.290",
+                "Degree": "82.00",
+                "Grade": "B+(3)"
+            },
+            {
+                "Course Code": "NAD11713",
+                "Course Name": "أساسيات الجودة والامان فى الرعاية الصحية",
+                "Course Status": "Active",
+                "Point": "3.340",
+                "Degree": "83.00",
+                "Grade": "B+(2)"
+            }
+        ]
+    },
+    {
+        "اسم الطالب": "ابرام صلاح كنعان غالي غبريال",
+        "رقم الجلوس": "230800002",
+        "CGPA": "3.36",
+        "First Semester GPA": "3.270",
+        "First Semester Courses": [
+            {
+                "Course Code": "AHN1111",
+                "Course Name": "أساسيات تمريض 1 ( نظري )",
+                "Course Status": "Active",
+                "Point": "2.690",
+                "Degree": "135.00",
+                "Grade": "C (3)"
+            },
+            {
+                "Course Code": "AHN1118",
+                "Course Name": "اخلاقيات المهنة والتشريعات",
+                "Course Status": "Active",
+                "Point": "2.540",
+                "Degree": "63.00",
+                "Grade": "D (2)"
+            },
+            {
+                "Course Code": "AHN1216",
+                "Course Name": "فسيولوجى",
+                "Course Status": "Active",
+                "Point": "3.140",
+                "Degree": "78.00",
+                "Grade": "B (2)"
+            },
+            {
+                "Course Code": "AHN1217",
+                "Course Name": "تشريح ( نظرى )",
+                "Course Status": "Active",
+                "Point": "3.290",
+                "Degree": "82.00",
+                "Grade": "B+(3)"
+            },
+            {
+                "Course Code": "AHN1219",
+                "Course Name": "كمياء حيوية",
+                "Course Status": "Active",
+                "Point": "3.240",
+                "Degree": "81.00",
+                "Grade": "B+(4)"
+            },
+            {
+                "Course Code": "AHN13118",
+                "Course Name": "حقوق الانسان",
+                "Course Status": "Active",
+                "Point": "3.290",
+                "Degree": "41.00",
+                "Grade": "B+(3)"
+            },
+            {
+                "Course Code": "AHN1312",
+                "Course Name": "لغة انجليزية 1",
+                "Course Status": "Active",
+                "Point": "3.540",
+                "Degree": "88.00",
+                "Grade": "A-(2)"
+            },
+            {
+                "Course Code": "AHN14111",
+                "Course Name": "تشريح (معملى)",
+                "Course Status": "Active",
+                "Point": "3.190",
+                "Degree": "79.00",
+                "Grade": "B (1)"
+            },
+            {
+                "Course Code": "AHN1413",
+                "Course Name": "أساسيات تمريض 1 (عملى)",
+                "Course Status": "Active",
+                "Point": "3.790",
+                "Degree": "188.25",
+                "Grade": "A (1)"
+            },
+            {
+                "Course Code": "ANA12110",
+                "Course Name": "ميكروبيولوجى ومكافحة العدوى",
+                "Course Status": "Active",
+                "Point": "3.600",
+                "Degree": "90.00",
+                "Grade": "A (5)"
+            }
+        ],
+        "Second Semester GPA": "3.460",
+        "Second Semester Courses": [
+            {
+                "Course Code": "AHN11114",
+                "Course Name": "التقييم الصحى (نظرى)",
+                "Course Status": "Active",
+                "Point": "3.490",
+                "Degree": "87.00",
+                "Grade": "A-(3)"
+            },
+            {
+                "Course Code": "AHN1112",
+                "Course Name": "اساسيات التمريض 2 (نظرى)",
+                "Course Status": "Active",
+                "Point": "3.390",
+                "Degree": "169.00",
+                "Grade": "B+(1)"
+            },
+            {
+                "Course Code": "AHN1114",
+                "Course Name": "الرعاية التمريضية الشاملة",
+                "Course Status": "Active",
+                "Point": "3.590",
+                "Degree": "89.00",
+                "Grade": "A-(1)"
+            },
+            {
+                "Course Code": "AHN12115",
+                "Course Name": "علم الادوية",
+                "Course Status": "Active",
+                "Point": "3.800",
+                "Degree": "95.00",
+                "Grade": "A+(6)"
+            },
+            {
+                "Course Code": "AHN14116",
+                "Course Name": "التقييم الصحى (معملى)",
+                "Course Status": "Active",
+                "Point": "3.390",
+                "Degree": "84.00",
+                "Grade": "B+(1)"
+            },
+            {
+                "Course Code": "AHN1414",
+                "Course Name": "أساسيات التمريض 2 (عملى)",
+                "Course Status": "Active",
+                "Point": "3.690",
+                "Degree": "185.00",
+                "Grade": "A (3)"
+            },
+            {
+                "Course Code": "CHN13617",
+                "Course Name": "التثقيف الصحى",
+                "Course Status": "Active",
+                "Point": "3.200",
+                "Degree": "80.00",
+                "Grade": "B+(5)"
+            },
+            {
+                "Course Code": "ELC1",
+                "Course Name": "مهارات التفكير وحل المشكلات",
+                "Course Status": "Active",
+                "Point": "3.140",
+                "Degree": "78.00",
+                "Grade": "B (2)"
+            },
+            {
+                "Course Code": "NAD11713",
+                "Course Name": "أساسيات الجودة والامان فى الرعاية الصحية",
+                "Course Status": "Active",
+                "Point": "3.240",
+                "Degree": "81.00",
+                "Grade": "B+(4)"
+            }
+        ]
+    }
+]
