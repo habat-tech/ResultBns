@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض النتائج والترتيب بناءً على GPA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .duplicate {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>عرض النتائج والترتيب بناءً على GPA</h1>
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>الترتيب</th>
+                    <th>اسم الطالب</th>
+                    <th>رقم الجلوس</th>
+                    <th>GPA</th>
+                    <th>ملاحظة</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        async function loadData() {
+            try {
+                const response = await fetch('نتائج_GPA.json');
+                const data = await response.json();
+                displayResults(data);
+            } catch (error) {
+                console.error('حدث خطأ أثناء تحميل البيانات:', error);
+            }
+        }
+
+        function displayResults(data) {
+            const tableBody = document.querySelector('#resultsTable tbody');
+            
+            // تصفية وفرز البيانات
+            const filteredData = data
+                .filter(student => student.GPA !== "غير متاح")
+                .sort((a, b) => b.GPA - a.GPA);
+
+            let currentGPA = null;
+            let currentRank = 1;
+            let sameGPACount = 0;
+            
+            filteredData.forEach((student) => {
+                const row = document.createElement('tr');
+                
+                // تحقق مما إذا كان هناك تغيير في الـ GPA
+                if (student.GPA !== currentGPA) {
+                    // GPA جديد
+                    if (currentGPA !== null) {
+                        currentRank++; // زيادة الترتيب فقط عند تغيير الـ GPA
+                    }
+                    currentGPA = student.GPA;
+                    sameGPACount = 0;
+                } else {
+                    sameGPACount++;
+                }
+
+                row.innerHTML = `
+                    <td>${currentRank}</td>
+                    <td>${student['اسم الطالب']}</td>
+                    <td>${student['رقم الجلوس']}</td>
+                    <td>${student.GPA}</td>
+                    <td class="${sameGPACount > 0 ? 'duplicate' : ''}">${sameGPACount > 0 ? 'مكرر' : ''}</td>
+                `;
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        window.onload = loadData;
+    </script>
+</body>
+</html>
