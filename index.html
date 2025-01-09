@@ -413,10 +413,16 @@
         // Reference to the visitorCount path
         const visitorCountRef = ref(database, 'visitorCount');
 
-        // Increase visitor count
-        runTransaction(visitorCountRef, (count) => {
-            return (count || 0) + 1;
-        });
+        // Check if the visitor is unique using localStorage
+        if (!localStorage.getItem('visited')) {
+            // Increase visitor count only if the visitor is unique
+            runTransaction(visitorCountRef, (count) => {
+                return (count || 0) + 1;
+            });
+
+            // Mark the visitor as not unique
+            localStorage.setItem('visited', 'true');
+        }
 
         // Display visitor count
         onValue(visitorCountRef, (snapshot) => {
