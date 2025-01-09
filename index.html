@@ -392,7 +392,7 @@
     <script type="module">
         // Import Firebase functions
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, transaction, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getDatabase, ref, runTransaction, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -414,7 +414,7 @@
         const visitorCountRef = ref(database, 'visitorCount');
 
         // Increase visitor count
-        transaction(visitorCountRef, (count) => {
+        runTransaction(visitorCountRef, (count) => {
             return (count || 0) + 1;
         });
 
@@ -422,6 +422,9 @@
         onValue(visitorCountRef, (snapshot) => {
             const count = snapshot.val();
             document.getElementById('visitorCount').textContent = `عدد الزوار: ${count}`;
+        }, (error) => {
+            console.error("حدث خطأ في قراءة البيانات:", error);
+            document.getElementById('visitorCount').textContent = "خطأ في التحميل!";
         });
     </script>
 </body>
