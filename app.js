@@ -33,7 +33,12 @@ if (!localStorage.getItem('visited')) {
 // Display visitor count
 onValue(visitorCountRef, (snapshot) => {
     const count = snapshot.val();
-    document.getElementById('visitorCount').textContent = `عدد الزوار: ${count}`;
+    console.log("عدد الزوار:", count); // تحقق من القيمة في الكونسول
+    if (count !== null) {
+        document.getElementById('visitorCount').textContent = `عدد الزوار: ${count}`;
+    } else {
+        document.getElementById('visitorCount').textContent = "لا توجد بيانات!";
+    }
 }, (error) => {
     console.error("حدث خطأ في قراءة البيانات:", error);
     document.getElementById('visitorCount').textContent = "خطأ في التحميل!";
