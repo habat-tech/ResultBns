@@ -276,6 +276,28 @@
             box-shadow: var(--shadow-sm);
         }
 
+        /* زر عدد الزوار */
+        .visitor-count {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: var(--shadow-md);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-base);
+            z-index: 1000;
+        }
+
+        .visitor-count:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 1.5rem;
@@ -362,6 +384,45 @@
                 </article>
             </div>
         </section>
+
+        <!-- زر عدد الزوار -->
+        <div class="visitor-count" id="visitorCount">جارٍ التحميل...</div>
     </main>
+
+    <script type="module">
+        // Import Firebase functions
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, transaction, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBspquJBaQrSm1JnEqr1MuTd_8PUGgpbOw",
+            authDomain: "numbervistor.firebaseapp.com",
+            projectId: "numbervistor",
+            storageBucket: "numbervistor.appspot.com",
+            messagingSenderId: "46274792407",
+            appId: "1:46274792407:web:596087e37d1e0798939992",
+            measurementId: "G-ES4BS066E1",
+            databaseURL: "https://numbervistor-default-rtdb.firebaseio.com/" // تأكد من إضافة هذا
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Reference to the visitorCount path
+        const visitorCountRef = ref(database, 'visitorCount');
+
+        // Increase visitor count
+        transaction(visitorCountRef, (count) => {
+            return (count || 0) + 1;
+        });
+
+        // Display visitor count
+        onValue(visitorCountRef, (snapshot) => {
+            const count = snapshot.val();
+            document.getElementById('visitorCount').textContent = `عدد الزوار: ${count}`;
+        });
+    </script>
 </body>
 </html>
