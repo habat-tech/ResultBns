@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة مواد كلية التمريض</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #f4f7f6; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 700px; 
+            margin: 0 auto; 
+            background: #fff; 
+            padding: 20px 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+        }
+        h2 { 
+            text-align: center; 
+            color: #2c3e50; 
+            border-bottom: 2px solid #3498db; 
+            padding-bottom: 10px;
+        }
+        .course-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 12px 0; 
+            border-bottom: 1px solid #eee; 
+            transition: background-color 0.2s;
+        }
+        .course-item:hover {
+            background-color: #f9f9f9;
+        }
+        label { 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            width: 100%; 
+            font-size: 16px;
+        }
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .price { 
+            font-weight: bold; 
+            color: #27ae60; 
+            background: #e8f8f5;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .total-section { 
+            margin-top: 25px; 
+            font-size: 22px; 
+            font-weight: bold; 
+            color: #fff; 
+            text-align: center; 
+            padding: 15px; 
+            background: #2c3e50; 
+            border-radius: 8px; 
+            position: sticky;
+            bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>اختر المواد لحساب الإجمالي المالي</h2>
+    <div id="courses-list"></div>
+    
+    <div class="total-section">
+        الإجمالي الكلي: <span id="total-price">0</span>
+    </div>
+</div>
+
+<script>
+    // قائمة المواد المستخرجة من الجدول
+    const courses = [
+        { id: 'AHN1112', name: 'أساسيات التمريض 2 (نظري)', price: 160 },
+        { id: 'AHN1414', name: 'أساسيات التمريض 2 (عملي)', price: 160 },
+        { id: 'NAD11713', name: 'أساسيات الجودة', price: 140 },
+        { id: 'AHN1114', name: 'الرعاية التمريضية الشاملة', price: 140 },
+        { id: 'AHN11114', name: 'التقييم الصحي (نظري)', price: 80 },
+        { id: 'AHN14116', name: 'التقييم الصحي (معملي)', price: 80 },
+        { id: 'AHN12115', name: 'علم الأدوية', price: 140 },
+        { id: 'CHN13617', name: 'التثقيف الصحي', price: 80 },
+        { id: 'AHN2118', name: 'تمريض صحة البالغين II (نظري)', price: 160 },
+        { id: 'AHN24110', name: 'تمريض صحة البالغين II (عملي)', price: 160 },
+        { id: 'AHN2119', name: 'تمريض الحالات الحرجة والطوارئ (نظري)', price: 160 },
+        { id: 'AHN22112', name: 'أمراض الجراحة', price: 140 },
+        { id: 'AHN22113', name: 'طب الحالات الحرجة والطوارئ (نظري)', price: 140 },
+        { id: 'AHN24111', name: 'تمريض الحالات الحرجة والطوارئ (عملي)', price: 160 },
+        { id: 'PEN3141', name: 'تمريض الأطفال (نظري)', price: 160 },
+        { id: 'PEN3442', name: 'تمريض الأطفال (عملي)', price: 180 },
+        { id: 'PEN3346', name: 'مبادئ الإحصاء', price: 140 },
+        { id: 'PEN3245', name: 'جراحة الأطفال', price: 140 },
+        { id: 'CHN4161', name: 'تمريض صحة المجتمع (نظري)', price: 160 },
+        { id: 'CHN4462', name: 'تمريض صحة المجتمع (عملي)', price: 160 },
+        { id: 'NAD4171', name: 'إدارة التمريض (نظري)', price: 140 },
+        { id: 'NAD4173', name: 'إدارة صحة عامة', price: 140 },
+        { id: 'NAD4472', name: 'إدارة التمريض (عملي)', price: 140 },
+        { id: 'ELC3', name: 'سلامة الغذاء', price: 140 },
+        { id: 'ELC4', name: 'الرعاية التمريضية للمرضى ذوي الاحتياجات الخاصة', price: 140 },
+        { id: 'ELC5', name: 'الصحة المهنية', price: 140 },
+        { id: 'PEN3244', name: 'طب الأطفال', price: 140 },
+        { id: 'PEN3143', name: 'الممارسة التمريضية القائمة على الأدلة', price: 140 }
+    ];
+
+    const container = document.getElementById('courses-list');
+    const totalSpan = document.getElementById('total-price');
+    let total = 0;
+
+    // رسم المواد في الصفحة
+    courses.forEach(course => {
+        const div = document.createElement('div');
+        div.className = 'course-item';
+        
+        div.innerHTML = `
+            <label>
+                <input type="checkbox" value="${course.price}" onchange="calculateTotal(this)">
+                <span><strong>${course.id}</strong> - ${course.name}</span>
+            </label>
+            <span class="price">${course.price}</span>
+        `;
+        container.appendChild(div);
+    });
+
+    // دالة حساب الإجمالي
+    function calculateTotal(checkbox) {
+        const price = parseInt(checkbox.value);
+        if (checkbox.checked) {
+            total += price;
+        } else {
+            total -= price;
+        }
+        totalSpan.innerText = total;
+    }
+</script>
+
+</body>
+</html>
