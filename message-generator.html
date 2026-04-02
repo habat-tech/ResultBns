@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منشئ رسائل التسجيل</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #e5ddd5; /* لون خلفية واتساب */
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background: #fff; 
+            padding: 20px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
+        h2 { 
+            text-align: center; 
+            color: #075e54; 
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .input-group input[type="text"], .input-group input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .courses-container {
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+        }
+        .course-item {
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .course-item:last-child {
+            border-bottom: none;
+        }
+        .course-item input[type="checkbox"] {
+            margin-left: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .output-container {
+            margin-top: 20px;
+            background: #dcf8c6; /* لون رسالة واتساب */
+            padding: 15px;
+            border-radius: 10px;
+            position: relative;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            background: transparent;
+            border: none;
+            resize: none;
+            font-size: 16px;
+            font-family: inherit;
+            line-height: 1.5;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #25D366; /* لون زر واتساب */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #128C7E;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>تجهيز رسالة المواد</h2>
+    
+    <div class="input-group">
+        <label>الاسم الرباعي</label>
+        <input type="text" id="studentName" placeholder="أحمد صلاح أحمد..." oninput="generateMessage()">
+    </div>
+
+    <div class="input-group">
+        <label>الرقم القومي (14 رقم)</label>
+        <input type="number" id="nationalId" placeholder="304122..." oninput="generateMessage()">
+    </div>
+
+    <div class="input-group">
+        <label>كود الطالب</label>
+        <input type="number" id="studentCode" placeholder="230800030" oninput="generateMessage()">
+    </div>
+
+    <div class="input-group">
+        <label>اختر المواد:</label>
+        <div class="courses-container" id="courses-list">
+            </div>
+    </div>
+
+    <div class="input-group">
+        <label>ملاحظة إضافية (اختياري)</label>
+        <input type="text" id="extraNote" placeholder="مثال: اسمي مش موجود" oninput="generateMessage()">
+    </div>
+
+    <div class="output-container">
+        <textarea id="outputMessage" readonly placeholder="الرسالة هتظهر هنا..."></textarea>
+    </div>
+    
+    <button onclick="copyMessage()">نسخ الرسالة</button>
+</div>
+
+<script>
+    const courses = [
+        { id: 'AHN1112', name: 'أساسيات التمريض 2 (نظري)' },
+        { id: 'AHN1414', name: 'أساسيات التمريض 2 (عملي)' },
+        { id: 'NAD11713', name: 'أساسيات الجودة' },
+        { id: 'AHN1114', name: 'الرعاية التمريضية الشاملة' },
+        { id: 'AHN11114', name: 'التقييم الصحي (نظري)' },
+        { id: 'AHN14116', name: 'تقييم صحي عملي' },
+        { id: 'AHN12115', name: 'علم الأدوية' },
+        { id: 'CHN13617', name: 'التثقيف الصحي' },
+        { id: 'AHN2118', name: 'تمريض بالغين 2 نظري' },
+        { id: 'AHN24110', name: 'تمريض صحة البالغين II (عملي)' },
+        { id: 'AHN2119', name: 'تمريض الحالات الحرجة والطوارئ (نظري)' },
+        { id: 'AHN22112', name: 'أمراض الجراحة' },
+        { id: 'AHN22113', name: 'طب الحالات الحرجة والطوارئ (نظري)' },
+        { id: 'AHN24111', name: 'تمريض الحالات الحرجة والطوارئ (عملي)' },
+        { id: 'PEN3141', name: 'تمريض الأطفال (نظري)' },
+        { id: 'PEN3442', name: 'تمريض أطفال عملي' },
+        { id: 'PEN3346', name: 'مبادئ الإحصاء' },
+        { id: 'PEN3245', name: 'جراحة أطفال' },
+        { id: 'CHN4161', name: 'تمريض صحة المجتمع (نظري)' },
+        { id: 'CHN4462', name: 'تمريض صحة المجتمع (عملي)' },
+        { id: 'NAD4171', name: 'إدارة التمريض (نظري)' },
+        { id: 'NAD4173', name: 'إدارة صحة عامة' },
+        { id: 'NAD4472', name: 'إدارة التمريض (عملي)' },
+        { id: 'ELC3', name: 'سلامة الغذاء' },
+        { id: 'ELC4', name: 'الرعاية التمريضية للمرضى ذوي الاحتياجات الخاصة' },
+        { id: 'ELC5', name: 'الصحة المهنية' },
+        { id: 'PEN3244', name: 'طب الأطفال' },
+        { id: 'PEN3143', name: 'ممارسة تمريضية' }
+    ];
+
+    const container = document.getElementById('courses-list');
+
+    // عرض المواد في القائمة
+    courses.forEach(course => {
+        const div = document.createElement('div');
+        div.className = 'course-item';
+        div.innerHTML = `
+            <input type="checkbox" class="course-cb" data-name="${course.name}" data-id="${course.id}" onchange="generateMessage()">
+            <label>${course.name} - ${course.id}</label>
+        `;
+        container.appendChild(div);
+    });
+
+    // توليد الرسالة
+    function generateMessage() {
+        const name = document.getElementById('studentName').value.trim();
+        const nid = document.getElementById('nationalId').value.trim();
+        const code = document.getElementById('studentCode').value.trim();
+        const note = document.getElementById('extraNote').value.trim();
+        
+        let message = '';
+        if (name) message += name + '\n';
+        if (nid) message += nid + '\n';
+        if (code) message += code + '\n';
+
+        const checkboxes = document.querySelectorAll('.course-cb:checked');
+        checkboxes.forEach(cb => {
+            message += `${cb.getAttribute('data-name')} ${cb.getAttribute('data-id')}\n`;
+        });
+
+        if (note) message += note;
+
+        document.getElementById('outputMessage').value = message;
+    }
+
+    // نسخ الرسالة
+    function copyMessage() {
+        const textarea = document.getElementById('outputMessage');
+        textarea.select();
+        document.execCommand('copy');
+        
+        const btn = document.querySelector('button');
+        const originalText = btn.innerText;
+        btn.innerText = 'تم النسخ بنجاح! ✔️';
+        btn.style.backgroundColor = '#128C7E';
+        
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.style.backgroundColor = '#25D366';
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>
